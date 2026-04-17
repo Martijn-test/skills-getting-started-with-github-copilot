@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
         activityCard.querySelectorAll(".delete-participant").forEach((btn) => {
           btn.addEventListener("click", async (e) => {
             e.preventDefault();
-            await unregisterParticipant(name, btn.dataset.email);
+            await unregisterParticipant(btn.dataset.activity, btn.dataset.email);
           });
         });
 
@@ -77,10 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const result = await response.json();
 
       if (response.ok) {
-        messageDiv.textContent = result.message;
-        messageDiv.className = "success";
         signupForm.reset();
         await fetchActivities();
+        messageDiv.textContent = result.message;
+        messageDiv.className = "success";
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
